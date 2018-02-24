@@ -82,8 +82,7 @@ function uploadImage(req, res) {
   };
 
   s3.upload(params, function (err, data) {
-    if (err) console.log(err, err.stack); // an error occurred   
-    console.log(data);
+    if (err) console.log(err); // an error occurred   
     res.redirect("/images/" + data.Bucket);
   });
 }
