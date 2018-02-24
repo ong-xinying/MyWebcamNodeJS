@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <title>My Webcam Images</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="../js/webcam.js"></script>
+<script src="../js/redirect.js"></script>
+</head>
+<body>
+<div class="container">
+<div class="jumbotron">
+<h3 align="center">My Images!</h3>
+<hr>
+<div><button class="btn btn-outline-success" type="button" onclick="goBack()">Back to Snapping!</button></div>
+<h4>List of Images from Bucket "{{bucket}}":</h4>
+<table>
+    {{#each imageList}}
+    <tr>
+        <td>
+            <img src="http://{{{@root.bucket}}}.s3.amazonaws.com/{{{Key}}}">
+        </td>
+    </tr>
+    {{/each}}
+</table>
+</body>
+</html>

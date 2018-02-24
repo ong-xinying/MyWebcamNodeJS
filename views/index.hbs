@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+    <title>My Webcam Upload</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="../js/webcam.js"></script>
+<script src="../js/getList.js"></script>
+</head>
+<body>
+<div class="container">
+<div class="jumbotron">
+<h3 align="center">Snap an Image!</h3>
+<hr>
+<h4>Pick a Bucket to Upload Snapshot:</h4>
+<form method="post" action="/">
+<select name="my_bucket" id="my_select">
+    {{#each bucketList}}
+  <option value="{{Name}}">{{Name}}</option>
+  {{/each}} 
+</select>
+<br><br>
+<div><button class="btn btn-outline-success" type="button" onclick="getList()">View Directory of Selected Bucket</button></div>
+<div><button class="btn btn-outline-success" type="button" onclick="getImages()">View Images in Selected Bucket</button></div>
+	<br>
+    <div class="row">
+        <div class="col-md-6">
+    <div id="my_camera" style="width:480px; height:270px;"></div>
+	<script language="JavaScript">
+		Webcam.attach( '#my_camera' );	
+		function take_snapshot() {
+			Webcam.snap( function(data_uri) {
+				document.getElementById('my_result').innerHTML = '<img src="'+data_uri+'"/>';
+                $('#image_id').val(data_uri);
+                document.getElementById('upload_div').style.display = "block";
+                document.getElementById("my_upload").disabled = false;                            
+			});
+		}
+	</script>
+    <div><button class="btn btn-outline-success" type="button" onclick="take_snapshot()">Take a Snapshot!</button></div>
+    </div>
+    <div class="col-md-6">
+    <div id="my_result"></div>
+    <input type="hidden" id="image_id" name="my_image">
+    <div id="upload_div">
+    <button class="btn btn-outline-success" type="submit" id="my_upload" disabled="true">Upload Snapshot!</button></div>
+    </div>
+    </div>
+    </form> 
+    </div>
+</div>
+</body>
+</html>
